@@ -1,0 +1,86 @@
+<form class="hollow-knight sheet item weapon" autocomplete="off">
+  <header class="hk-item-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"/>
+    <div class="hk-item-details">
+      <input name="name" type="text" value="{{item.name}}" placeholder="Weapon Name"/>
+      <div class="hk-flex-row hk-gap-sm">
+        <select name="system.rarity">
+          <option value="common" {{#if (eq system.rarity "common")}}selected{{/if}}>Common</option>
+          <option value="uncommon" {{#if (eq system.rarity "uncommon")}}selected{{/if}}>Uncommon</option>
+          <option value="rare" {{#if (eq system.rarity "rare")}}selected{{/if}}>Rare</option>
+          <option value="legendary" {{#if (eq system.rarity "legendary")}}selected{{/if}}>Legendary</option>
+        </select>
+        <label style="font-size:0.8rem; color:var(--hk-text-secondary); display:flex; align-items:center; gap:0.25rem;">
+          <input type="checkbox" name="system.equipped" {{#if system.equipped}}checked{{/if}}/> Equipped
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <section class="hk-item-stats">
+    <div class="hk-stat-row">
+      <label>Weapon Type</label>
+      <input type="text" name="system.weaponType" value="{{system.weaponType}}" placeholder="nail, hook, etc."/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Damage</label>
+      <input type="number" name="system.damage" value="{{system.damage}}" min="0"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Range</label>
+      <select name="system.range">
+        <option value="melee" {{#if (eq system.range "melee")}}selected{{/if}}>Melee</option>
+        <option value="reach" {{#if (eq system.range "reach")}}selected{{/if}}>Reach</option>
+        <option value="range3" {{#if (eq system.range "range3")}}selected{{/if}}>Range (3)</option>
+        <option value="range4" {{#if (eq system.range "range4")}}selected{{/if}}>Range (4)</option>
+        <option value="range5" {{#if (eq system.range "range5")}}selected{{/if}}>Range (5)</option>
+        <option value="range7" {{#if (eq system.range "range7")}}selected{{/if}}>Range (7)</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Hands</label>
+      <select name="system.hands">
+        <option value="0H" {{#if (eq system.hands "0H")}}selected{{/if}}>0H</option>
+        <option value="1H" {{#if (eq system.hands "1H")}}selected{{/if}}>1H</option>
+        <option value="2H" {{#if (eq system.hands "2H")}}selected{{/if}}>2H</option>
+        <option value="2H+" {{#if (eq system.hands "2H+")}}selected{{/if}}>2H+</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Quality</label>
+      <input type="number" name="system.quality" value="{{system.quality}}" min="0"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Bulk</label>
+      <select name="system.bulk">
+        <option value="light" {{#if (eq system.bulk "light")}}selected{{/if}}>Light</option>
+        <option value="1" {{#if (eq system.bulk "1")}}selected{{/if}}>1</option>
+        <option value="2" {{#if (eq system.bulk "2")}}selected{{/if}}>2</option>
+        <option value="3" {{#if (eq system.bulk "3")}}selected{{/if}}>3</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Upgrade Tier</label>
+      <select name="system.upgradeTier">
+        <option value="none" {{#if (eq system.upgradeTier "none")}}selected{{/if}}>None</option>
+        <option value="honed" {{#if (eq system.upgradeTier "honed")}}selected{{/if}}>Honed (+1)</option>
+        <option value="channeled" {{#if (eq system.upgradeTier "channeled")}}selected{{/if}}>Channeled (+2)</option>
+        <option value="coiled" {{#if (eq system.upgradeTier "coiled")}}selected{{/if}}>Coiled (+3)</option>
+        <option value="pure" {{#if (eq system.upgradeTier "pure")}}selected{{/if}}>Pure (+4)</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Modifier</label>
+      <input type="text" name="system.modifier" value="{{system.modifier}}" placeholder="none"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Cost (Geo)</label>
+      <input type="number" name="system.cost" value="{{system.cost}}" min="0"/>
+    </div>
+  </section>
+
+  <section class="hk-biography">
+    <h3>Abilities & Description</h3>
+    <textarea name="system.description" placeholder="Weapon abilities and description...">{{system.description}}</textarea>
+  </section>
+</form>

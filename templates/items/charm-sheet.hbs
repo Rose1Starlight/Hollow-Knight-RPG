@@ -1,0 +1,47 @@
+<form class="hollow-knight sheet item charm" autocomplete="off">
+    <header class="hk-item-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"/>
+        <div class="hk-item-details">
+            <input name="name" type="text" value="{{item.name}}" placeholder="Charm Name"/>
+            <div class="hk-flex-row hk-gap-sm">
+                <select name="system.rarity">
+                    <option value="common" {{#if (eq system.rarity "common")}}selected{{/if}}>Common</option>
+                    <option value="uncommon" {{#if (eq system.rarity "uncommon")}}selected{{/if}}>Uncommon</option>
+                    <option value="rare" {{#if (eq system.rarity "rare")}}selected{{/if}}>Rare</option>
+                    <option value="legendary" {{#if (eq system.rarity "legendary")}}selected{{/if}}>Legendary</option>
+                </select>
+                <label style="font-size:0.8rem; color:var(--hk-text-secondary); display:flex; align-items:center; gap:0.25rem;">
+                    <input type="checkbox" name="system.equipped" {{#if system.equipped}}checked{{/if}}/> Equipped
+                </label>
+            </div>
+        </div>
+    </header>
+    <section class="hk-item-stats">
+        <div class="hk-stat-row">
+            <label>Notch Cost</label>
+            <input type="number" name="system.notchCost" value="{{system.notchCost}}" min="1" max="6"/>
+        </div>
+        <div class="hk-stat-row">
+            <label>Charm Type</label>
+            <select name="system.charmType">
+                <option value="general" {{#if (eq system.charmType "general")}}selected{{/if}}>General</option>
+                <option value="combat" {{#if (eq system.charmType "combat")}}selected{{/if}}>Combat</option>
+                <option value="magic" {{#if (eq system.charmType "magic")}}selected{{/if}}>Magic</option>
+                <option value="movement" {{#if (eq system.charmType "movement")}}selected{{/if}}>Movement</option>
+                <option value="utility" {{#if (eq system.charmType "utility")}}selected{{/if}}>Utility</option>
+            </select>
+        </div>
+        <div class="hk-stat-row">
+            <label>Path Aligned</label>
+            <input type="text" name="system.pathAligned" value="{{system.pathAligned}}" placeholder="Optional path alignment"/>
+        </div>
+        <div class="hk-stat-row">
+            <label>Cost (Geo)</label>
+            <input type="number" name="system.cost" value="{{system.cost}}" min="0"/>
+        </div>
+    </section>
+    <section class="hk-biography">
+        <h3>Effect & Description</h3>
+        <textarea name="system.effect" placeholder="Charm effect description...">{{system.effect}}</textarea>
+    </section>
+</form>

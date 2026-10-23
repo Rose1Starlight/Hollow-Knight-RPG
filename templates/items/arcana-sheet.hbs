@@ -1,0 +1,57 @@
+<form class="hollow-knight sheet item arcana" autocomplete="off">
+  <header class="hk-item-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"/>
+    <div class="hk-item-details">
+      <input name="name" type="text" value="{{item.name}}" placeholder="Arcana Name"/>
+      <div class="hk-flex-row hk-gap-sm">
+        <select name="system.rarity">
+          <option value="common" {{#if (eq system.rarity "common")}}selected{{/if}}>Common</option>
+          <option value="uncommon" {{#if (eq system.rarity "uncommon")}}selected{{/if}}>Uncommon</option>
+          <option value="rare" {{#if (eq system.rarity "rare")}}selected{{/if}}>Rare</option>
+          <option value="legendary" {{#if (eq system.rarity "legendary")}}selected{{/if}}>Legendary</option>
+        </select>
+        <label style="font-size:0.8rem; color:var(--hk-text-secondary); display:flex; align-items:center; gap:0.25rem;">
+          <input type="checkbox" name="system.attuned" {{#if system.attuned}}checked{{/if}}/> Attuned
+        </label>
+      </div>
+    </div>
+  </header>
+  <section class="hk-item-stats">
+    <div class="hk-stat-row">
+      <label>Path</label>
+      <input type="text" name="system.path" value="{{system.path}}" placeholder="e.g., Seer, Shaman"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Difficulty</label>
+      <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="1"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Soul Cost</label>
+      <input type="number" name="system.soulCost" value="{{system.soulCost}}" min="0"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Range</label>
+      <select name="system.range">
+        <option value="self" {{#if (eq system.range "self")}}selected{{/if}}>Self</option>
+        <option value="touch" {{#if (eq system.range "touch")}}selected{{/if}}>Touch</option>
+        <option value="range3" {{#if (eq system.range "range3")}}selected{{/if}}>Range (3)</option>
+        <option value="range4" {{#if (eq system.range "range4")}}selected{{/if}}>Range (4)</option>
+        <option value="range5" {{#if (eq system.range "range5")}}selected{{/if}}>Range (5)</option>
+        <option value="aoe" {{#if (eq system.range "aoe")}}selected{{/if}}>AoE</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Duration</label>
+      <select name="system.duration">
+        <option value="instant" {{#if (eq system.duration "instant")}}selected{{/if}}>Instant</option>
+        <option value="brief" {{#if (eq system.duration "brief")}}selected{{/if}}>Brief</option>
+        <option value="scene" {{#if (eq system.duration "scene")}}selected{{/if}}>Scene</option>
+        <option value="sustained" {{#if (eq system.duration "sustained")}}selected{{/if}}>Sustained</option>
+      </select>
+    </div>
+  </section>
+  <section class="hk-biography">
+    <h3>Effect & Modifiers</h3>
+    <textarea name="system.effect" placeholder="Spell effect description...">{{system.effect}}</textarea>
+  </section>
+</form>

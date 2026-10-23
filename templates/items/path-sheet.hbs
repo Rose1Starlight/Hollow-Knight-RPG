@@ -1,0 +1,82 @@
+<form class="{{cssClass}}" autocomplete="off" style="padding: 10px;">
+    <header class="sheet-header" style="display: flex; gap: 15px; margin-bottom: 15px;">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" style="width: 80px; height: 80px; border: 1px solid var(--hk-border); border-radius: 4px; background: rgba(0,0,0,0.5);"/>
+        <div class="header-fields" style="flex: 1;">
+            <h1 class="charname" style="margin: 0; padding: 0; border-bottom: 1px solid var(--hk-accent-blue);">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Path Name" style="width: 100%; font-size: 1.8rem; background: transparent; border: none; color: var(--hk-text-primary);"/>
+            </h1>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <div style="flex: 1;">
+                    <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;">Path Type</label>
+                    <select name="system.pathType" style="width: 100%; padding: 4px; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border);">
+                        <option value="martial" {{#if (eq system.pathType "martial")}}selected{{/if}}>Martial (+1 Stamina/Rank)</option>
+                        <option value="mystic" {{#if (eq system.pathType "mystic")}}selected{{/if}}>Mystic (+1 Soul/Rank)</option>
+                    </select>
+                </div>
+                <div style="flex: 1.2;">
+                    <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;">Custom Bonus Type</label>
+                    <select name="system.customBonusType" style="width: 100%; padding: 4px; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border);">
+                        <option value="none" {{#if (eq system.customBonusType "none")}}selected{{/if}}>None (Standard)</option>
+                        <option value="stash" {{#if (eq system.customBonusType "stash")}}selected{{/if}}>Stash Pool</option>
+                        <option value="heart" {{#if (eq system.customBonusType "heart")}}selected{{/if}}>Extra Hearts</option>
+                        <option value="might" {{#if (eq system.customBonusType "might")}}selected{{/if}}>Might Attribute</option>
+                        <option value="insight" {{#if (eq system.customBonusType "insight")}}selected{{/if}}>Insight Attribute</option>
+                        <option value="shell" {{#if (eq system.customBonusType "shell")}}selected{{/if}}>Shell Attribute</option>
+                        <option value="grace" {{#if (eq system.customBonusType "grace")}}selected{{/if}}>Grace Attribute</option>
+                        <option value="cute" {{#if (eq system.customBonusType "cute")}}selected{{/if}}>Cute Attribute</option>
+                        <option value="spook" {{#if (eq system.customBonusType "spook")}}selected{{/if}}>Spook Attribute</option>
+                        <option value="speed" {{#if (eq system.customBonusType "speed")}}selected{{/if}}>Speed</option>
+                        <option value="absorption" {{#if (eq system.customBonusType "absorption")}}selected{{/if}}>Absorption</option>
+                        <option value="proficiency" {{#if (eq system.customBonusType "proficiency")}}selected{{/if}}>Proficiency Ranks</option>
+                        <option value="weaponQuality" {{#if (eq system.customBonusType "weaponQuality")}}selected{{/if}}>Weapon Attack Quality</option>
+                    </select>
+                </div>
+                <div style="flex: 0.6;">
+                    <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;" title="Multiplier per Rank">Value/Rank</label>
+                    <input type="number" name="system.customBonusValue" value="{{#if system.customBonusValue}}{{system.customBonusValue}}{{else}}1{{/if}}" step="0.5" style="width: 100%; padding: 4px; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border); text-align: center;" />
+                </div>
+            </div>
+            <div style="margin-top: 8px; display: flex; align-items: center; gap: 8px;">
+                <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;">Current Rank on Sheet:</label>
+                <input type="number" name="system.rank" value="{{#if system.rank}}{{system.rank}}{{else}}1{{/if}}" min="1" max="3" style="width: 60px; padding: 2px; text-align: center; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border);" />
+            </div>
+        </div>
+    </header>
+
+    <nav class="sheet-tabs tabs" data-group="primary" style="display: flex; gap: 20px; margin-bottom: 15px; border-bottom: 2px solid var(--hk-border); padding-bottom: 5px;">
+        <a class="item active" data-tab="description" style="font-size: 1.1rem; font-family: var(--hk-font-header); cursor: pointer; color: var(--hk-text-secondary); text-decoration: none;">Description</a>
+        <a class="item" data-tab="ranks" style="font-size: 1.1rem; font-family: var(--hk-font-header); cursor: pointer; color: var(--hk-text-secondary); text-decoration: none;">Rank Abilities</a>
+    </nav>
+
+    <section class="sheet-body" style="height: calc(100% - 150px); overflow-y: auto; padding-right: 5px;">
+        
+        <div class="tab active" data-tab="description" style="height: 100%;">
+            <div style="height: 100%; background: var(--hk-bg-panel); border: 1px solid var(--hk-border); padding: 8px; border-radius: 4px; color: var(--hk-text-primary); display: flex; flex-direction: column;">
+                {{editor enrichedDescription target="system.description" engine="prosemirror" button=true owner=owner editable=true}}
+            </div>
+        </div>
+
+        <div class="tab" data-tab="ranks">
+            <div class="form-group stacked" style="margin-bottom: 15px;">
+                <label style="font-weight: bold; font-size: 1.1rem; color: var(--hk-accent-blue); border-bottom: 1px solid var(--hk-border-light); display: block; margin-bottom: 5px; padding-bottom: 2px;">Rank 1 Ability</label>
+                <div style="min-height: 80px; background: var(--hk-bg-panel); border: 1px solid var(--hk-border); padding: 8px; border-radius: 4px; color: var(--hk-text-primary); display: flex; flex-direction: column;">
+                    {{editor enrichedRank1 target="system.rank1Ability" engine="prosemirror" button=true owner=owner editable=true}}
+                </div>
+            </div>
+            
+            <div class="form-group stacked" style="margin-bottom: 15px;">
+                <label style="font-weight: bold; font-size: 1.1rem; color: var(--hk-accent-blue); border-bottom: 1px solid var(--hk-border-light); display: block; margin-bottom: 5px; padding-bottom: 2px;">Rank 2 Ability</label>
+                <div style="min-height: 80px; background: var(--hk-bg-panel); border: 1px solid var(--hk-border); padding: 8px; border-radius: 4px; color: var(--hk-text-primary); display: flex; flex-direction: column;">
+                    {{editor enrichedRank2 target="system.rank2Ability" engine="prosemirror" button=true owner=owner editable=true}}
+                </div>
+            </div>
+            
+            <div class="form-group stacked" style="margin-bottom: 15px;">
+                <label style="font-weight: bold; font-size: 1.1rem; color: var(--hk-accent-blue); border-bottom: 1px solid var(--hk-border-light); display: block; margin-bottom: 5px; padding-bottom: 2px;">Rank 3 Ability</label>
+                <div style="min-height: 80px; background: var(--hk-bg-panel); border: 1px solid var(--hk-border); padding: 8px; border-radius: 4px; color: var(--hk-text-primary); display: flex; flex-direction: column;">
+                    {{editor enrichedRank3 target="system.rank3Ability" engine="prosemirror" button=true owner=owner editable=true}}
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

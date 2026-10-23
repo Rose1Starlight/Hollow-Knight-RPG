@@ -1,0 +1,52 @@
+<form class="hollow-knight sheet item equipment" autocomplete="off">
+  <header class="hk-item-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"/>
+    <div class="hk-item-details">
+      <input name="name" type="text" value="{{item.name}}" placeholder="Equipment Name"/>
+      <div class="hk-flex-row hk-gap-sm">
+        <select name="system.rarity">
+          <option value="common" {{#if (eq system.rarity "common")}}selected{{/if}}>Common</option>
+          <option value="uncommon" {{#if (eq system.rarity "uncommon")}}selected{{/if}}>Uncommon</option>
+          <option value="rare" {{#if (eq system.rarity "rare")}}selected{{/if}}>Rare</option>
+          <option value="legendary" {{#if (eq system.rarity "legendary")}}selected{{/if}}>Legendary</option>
+        </select>
+        <label style="font-size:0.8rem; color:var(--hk-text-secondary); display:flex; align-items:center; gap:0.25rem;">
+          <input type="checkbox" name="system.equipped" {{#if system.equipped}}checked{{/if}}/> Equipped
+        </label>
+      </div>
+    </div>
+  </header>
+  <section class="hk-item-stats">
+    <div class="hk-stat-row">
+      <label>Type</label>
+      <select name="system.equipmentType">
+        <option value="tool" {{#if (eq system.equipmentType "tool")}}selected{{/if}}>Tool</option>
+        <option value="belt" {{#if (eq system.equipmentType "belt")}}selected{{/if}}>Belt Item</option>
+        <option value="light" {{#if (eq system.equipmentType "light")}}selected{{/if}}>Light Source</option>
+        <option value="container" {{#if (eq system.equipmentType "container")}}selected{{/if}}>Container</option>
+        <option value="misc" {{#if (eq system.equipmentType "misc")}}selected{{/if}}>Miscellaneous</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Bulk</label>
+      <select name="system.bulk">
+        <option value="light" {{#if (eq system.bulk "light")}}selected{{/if}}>Light</option>
+        <option value="1" {{#if (eq system.bulk "1")}}selected{{/if}}>1</option>
+        <option value="2" {{#if (eq system.bulk "2")}}selected{{/if}}>2</option>
+        <option value="3" {{#if (eq system.bulk "3")}}selected{{/if}}>3</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Belt Slot</label>
+      <input type="checkbox" name="system.beltSlot" {{#if system.beltSlot}}checked{{/if}}/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Cost (Geo)</label>
+      <input type="number" name="system.cost" value="{{system.cost}}" min="0"/>
+    </div>
+  </section>
+  <section class="hk-biography">
+    <h3>Description & Effect</h3>
+    <textarea name="system.effect" placeholder="Equipment description and effect...">{{system.effect}}</textarea>
+  </section>
+</form>

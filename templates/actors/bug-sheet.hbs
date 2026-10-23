@@ -1,0 +1,652 @@
+<form class="hollow-knight sheet actor bug" autocomplete="off">
+    <header class="hk-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="80" width="80"/>
+        <div class="header-details">
+            <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'HOLLOW_KNIGHT.UI.BugName'}}"/>
+            <div class="hk-flex-row hk-gap-md" style="margin-top: 0.5rem; display:flex; align-items:center;">
+                <div class="hk-secondary-stat" style="flex: 1.5;">
+                    <label>{{localize "HOLLOW_KNIGHT.UI.Species"}}</label>
+                    <input type="text" name="system.details.species" value="{{system.details.species}}" style="width: 100%; border:none; background:transparent; border-bottom:1px solid var(--hk-border);"/>
+                </div>
+                <div class="hk-secondary-stat" style="flex: 1;">
+                    <label>{{localize "HOLLOW_KNIGHT.UI.Size"}}</label>
+                    <select name="system.details.size">
+                        <option value="tiny" {{#if (eq system.details.size "tiny")}}selected{{/if}}>{{localize "HOLLOW_KNIGHT.UI.Sizes.Tiny"}}</option>
+                        <option value="small" {{#if (eq system.details.size "small")}}selected{{/if}}>{{localize "HOLLOW_KNIGHT.UI.Sizes.Small"}}</option>
+                        <option value="average" {{#if (eq system.details.size "average")}}selected{{/if}}>{{localize "HOLLOW_KNIGHT.UI.Sizes.Average"}}</option>
+                        <option value="large" {{#if (eq system.details.size "large")}}selected{{/if}}>{{localize "HOLLOW_KNIGHT.UI.Sizes.Large"}}</option>
+                    </select>
+                </div>
+                <div class="hk-secondary-stat" style="flex: 1; display:flex; justify-content:flex-end; gap:10px; align-items:center;">
+                    <label>{{localize "HOLLOW_KNIGHT.UI.Hunger"}}</label>
+                    <span class="sec-val">{{system.details.hunger.value}}</span>
+                </div>
+                <div class="hk-secondary-stat" style="flex: 1; display:flex; justify-content:flex-end; gap:10px; align-items:center;">
+                    <label>{{localize "HOLLOW_KNIGHT.Pools.Belly"}}</label>
+                    <input type="number" name="system.pools.belly.value" value="{{system.pools.belly.value}}" style="width:40px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border-light);" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="hk-tabs">
+        <a class="item active" data-tab="stats">{{localize "HOLLOW_KNIGHT.Tabs.Stats"}}</a>
+        <a class="item" data-tab="combat">{{localize "HOLLOW_KNIGHT.Tabs.Combat"}}</a>
+        <a class="item" data-tab="magic">{{localize "HOLLOW_KNIGHT.Tabs.Magic"}}</a>
+        <a class="item" data-tab="inventory">{{localize "HOLLOW_KNIGHT.Tabs.Inventory"}}</a>
+        <a class="item" data-tab="biography">{{localize "HOLLOW_KNIGHT.Tabs.Bio"}}</a>
+    </nav>
+
+    <section class="hk-tab-content">
+        <div class="tab active" data-tab="stats">
+            <div class="hk-attributes">
+                <div class="hk-attribute might">
+                    <label class="attr-rollable" data-attribute="might">{{localize "HOLLOW_KNIGHT.Attributes.Might"}}</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="might">{{system.attributes.might.value}}</div>
+                        <input type="number" class="attr-bonus" name="system.attributes.might.bonus" value="{{system.attributes.might.bonus}}" step="0.5" placeholder="+0" />
+                    </div>
+                </div>
+                <div class="hk-attribute insight">
+                    <label class="attr-rollable" data-attribute="insight">{{localize "HOLLOW_KNIGHT.Attributes.Insight"}}</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="insight">{{system.attributes.insight.value}}</div>
+                        <input type="number" class="attr-bonus" name="system.attributes.insight.bonus" value="{{system.attributes.insight.bonus}}" step="0.5" placeholder="+0" />
+                    </div>
+                </div>
+                <div class="hk-attribute shell">
+                    <label class="attr-rollable" data-attribute="shell">{{localize "HOLLOW_KNIGHT.Attributes.Shell"}}</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="shell">{{system.attributes.shell.value}}</div>
+                        <input type="number" class="attr-bonus" name="system.attributes.shell.bonus" value="{{system.attributes.shell.bonus}}" step="0.5" placeholder="+0" />
+                    </div>
+                </div>
+                <div class="hk-attribute grace">
+                    <label class="attr-rollable" data-attribute="grace">{{localize "HOLLOW_KNIGHT.Attributes.Grace"}}</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="grace">{{system.attributes.grace.value}}</div>
+                        <input type="number" class="attr-bonus" name="system.attributes.grace.bonus" value="{{system.attributes.grace.bonus}}" step="0.5" placeholder="+0" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="hk-pools">
+                <div class="hk-pool heart">
+                    <label>{{localize "HOLLOW_KNIGHT.Pools.Heart"}}</label>
+                    <div class="pool-values">
+                        <button type="button" class="pool-adjust" data-pool="heart" data-delta="-1">−</button>
+                        <input type="number" name="system.pools.heart.value" value="{{system.pools.heart.value}}" readonly/>
+                        <span class="separator">/</span>
+                        <input type="number" name="system.pools.heart.max" value="{{system.pools.heart.max}}" readonly/>
+                        <button type="button" class="pool-adjust" data-pool="heart" data-delta="1">+</button>
+                    </div>
+                </div>
+                <div class="hk-pool stamina">
+                    <label>{{localize "HOLLOW_KNIGHT.Pools.Stamina"}}</label>
+                    <div class="pool-values">
+                        <button type="button" class="pool-adjust" data-pool="stamina" data-delta="-1">−</button>
+                        <input type="number" name="system.pools.stamina.value" value="{{system.pools.stamina.value}}" readonly/>
+                        <span class="separator">/</span>
+                        <input type="number" name="system.pools.stamina.max" value="{{system.pools.stamina.max}}" readonly/>
+                        <button type="button" class="pool-adjust" data-pool="stamina" data-delta="1">+</button>
+                    </div>
+                </div>
+                <div class="hk-pool soul">
+                    <label>{{localize "HOLLOW_KNIGHT.Pools.Soul"}}</label>
+                    <div class="pool-values">
+                        <button type="button" class="pool-adjust" data-pool="soul" data-delta="-1">−</button>
+                        <input type="number" name="system.pools.soul.value" value="{{system.pools.soul.value}}" readonly/>
+                        <span class="separator">/</span>
+                        <input type="number" name="system.pools.soul.max" value="{{system.pools.soul.max}}" readonly/>
+                        <button type="button" class="pool-adjust" data-pool="soul" data-delta="1">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hk-list-section" style="margin-top: 15px; margin-bottom: 15px; padding: 10px; background: rgba(0,0,0,0.15); border: 1px solid var(--hk-border); border-radius: 6px;">
+                <div style="font-family: var(--hk-font-header); color: var(--hk-text-primary); border-bottom: 1px solid var(--hk-border); margin-bottom: 8px; padding-bottom: 4px;">Lifeblood, Glory & Extras</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px;">
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-accent-blue); margin-bottom:4px;">{{localize "HOLLOW_KNIGHT.Pools.Lifeblood"}}</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="lifebloodHearts" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" name="system.gloryPools.lifebloodHearts.value" value="{{system.gloryPools.lifebloodHearts.value}}" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="lifebloodHearts" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-stamina-color); margin-bottom:4px;">{{localize "HOLLOW_KNIGHT.Pools.GStamina"}}</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="gloryStamina" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" name="system.gloryPools.gloryStamina.value" value="{{system.gloryPools.gloryStamina.value}}" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="gloryStamina" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-soul-color); margin-bottom:4px;">{{localize "HOLLOW_KNIGHT.Pools.GSoul"}}</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="glorySoul" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" name="system.gloryPools.glorySoul.value" value="{{system.gloryPools.glorySoul.value}}" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="glorySoul" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-accent-gold); margin-bottom:4px;">{{localize "HOLLOW_KNIGHT.Pools.GStash"}}</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="gloryStash" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" name="system.gloryPools.gloryStash.value" value="{{system.gloryPools.gloryStash.value}}" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="gloryStash" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-text-secondary); margin-bottom:4px;">{{localize "HOLLOW_KNIGHT.Pools.Pluck"}}</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="pluck" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" name="system.pools.pluck.value" value="{{system.pools.pluck.value}}" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="pluck" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-text-secondary); margin-bottom:4px;">{{localize "HOLLOW_KNIGHT.Pools.Stash"}}</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="stash" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" name="system.pools.stash.value" value="{{system.pools.stash.value}}" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="stash" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hk-secondary">
+                <div class="hk-secondary-stat">
+                    <label class="attr-rollable" data-attribute="cute">{{localize "HOLLOW_KNIGHT.Attributes.Cute"}}</label>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                        <span class="sec-val attr-rollable" data-attribute="cute">{{system.secondaryAttributes.cute.value}}</span>
+                        <input type="number" class="sec-bonus" name="system.secondaryAttributes.cute.sizeAllocation" value="{{system.secondaryAttributes.cute.sizeAllocation}}" step="0.5" placeholder="{{localize 'HOLLOW_KNIGHT.UI.Base'}}"/>
+                        <input type="number" class="sec-bonus" name="system.secondaryAttributes.cute.bonus" value="{{system.secondaryAttributes.cute.bonus}}" step="0.5" placeholder="+0"/>
+                    </div>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label class="attr-rollable" data-attribute="spook">{{localize "HOLLOW_KNIGHT.Attributes.Spook"}}</label>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                        <span class="sec-val attr-rollable" data-attribute="spook">{{system.secondaryAttributes.spook.value}}</span>
+                        <input type="number" class="sec-bonus" name="system.secondaryAttributes.spook.sizeAllocation" value="{{system.secondaryAttributes.spook.sizeAllocation}}" step="0.5" placeholder="{{localize 'HOLLOW_KNIGHT.UI.Base'}}"/>
+                        <input type="number" class="sec-bonus" name="system.secondaryAttributes.spook.bonus" value="{{system.secondaryAttributes.spook.bonus}}" step="0.5" placeholder="+0"/>
+                    </div>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>{{localize "HOLLOW_KNIGHT.Secondary.Speed"}}</label>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="sec-val">{{system.secondaryAttributes.speed.value}}</span>
+                        <input type="number" class="sec-bonus" name="system.secondaryAttributes.speed.bonus" value="{{system.secondaryAttributes.speed.bonus}}" placeholder="+0"/>
+                    </div>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>{{localize "HOLLOW_KNIGHT.Secondary.Absorption"}}</label>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="sec-val">{{system.secondaryAttributes.absorption.value}}</span>
+                        <input type="number" class="sec-bonus" name="system.secondaryAttributes.absorption.bonus" value="{{system.secondaryAttributes.absorption.bonus}}" placeholder="+0"/>
+                    </div>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>{{localize "HOLLOW_KNIGHT.Secondary.Footwork"}}</label>
+                    <span class="sec-val">{{system.secondaryAttributes.footwork.value}}</span>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>{{localize "HOLLOW_KNIGHT.Secondary.Load"}}</label>
+                    <span class="sec-val">{{system.secondaryAttributes.load.value}}</span>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>{{localize "HOLLOW_KNIGHT.Secondary.BeltSize"}}</label>
+                    <span class="sec-val">{{system.secondaryAttributes.beltSize.value}}</span>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>{{localize "HOLLOW_KNIGHT.Secondary.TechniqueSlots"}}</label>
+                    <span class="sec-val">{{system.secondaryAttributes.techniqueSlots.value}}</span>
+                </div>
+            </div>
+
+            <div class="hk-notches">
+                <label>{{localize "HOLLOW_KNIGHT.Secondary.Notches"}}:</label>
+                {{#each (range derived.notchMax)}}
+                <div class="hk-notch {{#if (lt this ../derived.notchUsage)}}filled{{/if}}"></div>
+                {{/each}}
+                <span style="margin-left: 0.5rem; font-size: 0.8rem; color: {{#if derived.isOvercharmed}}var(--hk-accent-red){{else}}var(--hk-text-secondary){{/if}};">
+                    {{derived.notchUsage}} / {{derived.notchMax}}
+                </span>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Traits"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="trait">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each traitHierarchy}}
+                    <div class="hk-item-container" data-item-id="{{this.parent.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.parent.name}}</span>
+                            <span class="item-details">{{localize "HOLLOW_KNIGHT.UI.Hunger"}}: {{this.parent.system.hungerCost}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{#if this.parent.system.effect}}<p><strong>Effect:</strong> {{{this.parent.system.effect}}}</p>{{/if}}
+                            {{{this.parent.system.description}}}
+                        </div>
+                    </div>
+                    {{#each this.children}}
+                    <div class="hk-item-container hk-subtrait-row" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">↳ {{this.name}}</span>
+                            <span class="item-details">{{localize "HOLLOW_KNIGHT.UI.Hunger"}}: {{this.system.hungerCost}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{#if this.system.effect}}<p><strong>Effect:</strong> {{{this.system.effect}}}</p>{{/if}}
+                            {{{this.system.description}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Proficiencies"}}</h3>
+                    <button type="button" class="add-btn prof-create">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each proficiencies}}
+                    <div class="hk-prof-container" data-prof-id="{{this.id}}">
+                        <div class="hk-prof-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <button type="button" class="prof-roll" style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--hk-accent-blue); cursor:pointer;"><i class="fas fa-dice-d6"></i></button>
+                            <span class="item-name" style="flex:1; font-weight:bold; color:var(--hk-text-primary);">{{this.name}}</span>
+                            <span class="item-details" style="margin-right:10px;">{{localize "HOLLOW_KNIGHT.UI.Rank"}}: {{this.rank}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="prof-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="prof-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{#if this.skillList.length}}
+                            <div style="margin-bottom: 15px;">
+                                <label style="font-size: 0.8rem; color:var(--hk-accent-blue); display:block; margin-bottom:6px;">Skills:</label>
+                                <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                                    {{#each this.skillList}}
+                                    <button type="button" class="prof-roll skill-chip" data-skill-name="{{this}}"><i class="fas fa-dice-d6"></i> {{this}}</button>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{#if this.description}}
+                            <div style="color:var(--hk-text-secondary); font-size:0.9rem;">
+                                <p style="margin:0;">{{this.description}}</p>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Paths"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="path">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.path}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-accent-blue);">Rank {{this.system.rank}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Type"}}:</strong> <span style="text-transform: capitalize;">{{this.system.pathType}}</span></p>
+                            {{#if this.system.rank1Ability}}<p style="margin-top:8px;"><strong>Rank 1:</strong> {{{this.system.rank1Ability}}}</p>{{/if}}
+                            {{#if this.system.rank2Ability}}<p style="margin-top:8px;"><strong>Rank 2:</strong> {{{this.system.rank2Ability}}}</p>{{/if}}
+                            {{#if this.system.rank3Ability}}<p style="margin-top:8px;"><strong>Rank 3:</strong> {{{this.system.rank3Ability}}}</p>{{/if}}
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border);"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-flex-row hk-gap-md" style="padding: 0.75rem; margin: 0.5rem;">
+                <button type="button" class="rest-btn" data-slept="false" style="flex:1; padding: 0.5rem; background: var(--hk-bg-panel); border: 1px solid var(--hk-border); border-radius: var(--hk-radius-sm); color: var(--hk-text-primary); cursor: pointer;">{{localize "HOLLOW_KNIGHT.Actions.Break"}}</button>
+                <button type="button" class="rest-btn" data-slept="true" style="flex:1; padding: 0.5rem; background: var(--hk-accent-blue-dim); border: 1px solid var(--hk-accent-blue); border-radius: var(--hk-radius-sm); color: var(--hk-bg-dark); cursor: pointer; font-weight: 600;">{{localize "HOLLOW_KNIGHT.Actions.RestSleep"}}</button>
+            </div>
+        </div>
+
+        <div class="tab" data-tab="combat">
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.WeaponArts"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="art">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.art}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name item-roll" style="cursor: pointer;">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-stamina-color);">{{this.system.staminaCost}} STA</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-roll"><i class="fas fa-dice-d6"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.ActionType"}}:</strong> <span style="text-transform: capitalize;">{{this.system.actionType}}</span></p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Conditions"}}</h3>
+                </div>
+                <div class="hk-secondary">
+                    <div class="hk-secondary-stat">
+                        <label>{{localize "HOLLOW_KNIGHT.Conditions.OffBalance"}}</label>
+                        <input type="number" name="system.conditions.offBalance.value" value="{{system.conditions.offBalance.value}}" min="0" max="3" />
+                    </div>
+                    <div class="hk-secondary-stat">
+                        <label>{{localize "HOLLOW_KNIGHT.Conditions.DeathsDoor"}}</label>
+                        <input type="checkbox" name="system.conditions.atDeathsDoor" {{#if system.conditions.atDeathsDoor}}checked{{/if}} />
+                    </div>
+                    <div class="hk-secondary-stat">
+                        <label>{{localize "HOLLOW_KNIGHT.Conditions.Unconscious"}}</label>
+                        <input type="checkbox" name="system.conditions.isUnconscious" {{#if system.conditions.isUnconscious}}checked{{/if}} />
+                    </div>
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.EquippedWeapons"}}</h3>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.weapon}}
+                    {{#if this.system.equipped}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name item-roll" style="cursor: pointer;">{{this.name}}</span>
+                            <span class="item-details">{{localize "HOLLOW_KNIGHT.UI.Dmg"}}: {{this.system.damage}} | {{localize "HOLLOW_KNIGHT.UI.Q"}}: {{this.system.quality}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-roll"><i class="fas fa-dice-d6"></i></button>
+                                <button type="button" class="item-toggle"><i class="fas fa-shield-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Range"}}:</strong> <span style="text-transform: capitalize;">{{this.system.range}}</span> | <strong>{{localize "HOLLOW_KNIGHT.UI.Hands"}}:</strong> {{this.system.hands}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab" data-tab="magic">
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Arcana"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="arcana">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.arcana}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name item-roll" style="cursor: pointer;">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-soul-color);">{{this.system.soulCost}} Soul | Diff: {{this.system.difficulty}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-roll"><i class="fas fa-magic"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Range"}}:</strong> <span style="text-transform:capitalize;">{{this.system.range}}</span></p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.EquippedCharms"}}</h3>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.charm}}
+                    {{#if this.system.equipped}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-accent-gold);">{{this.system.notchCost}} {{localize "HOLLOW_KNIGHT.Secondary.Notches"}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="charm-toggle"><i class="fas fa-circle"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{{this.system.description}}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.AvailableCharms"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="charm">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.charm}}
+                    {{#unless this.system.equipped}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">{{this.system.notchCost}} {{localize "HOLLOW_KNIGHT.Secondary.Notches"}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="charm-toggle"><i class="far fa-circle"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{{this.system.description}}}
+                        </div>
+                    </div>
+                    {{/unless}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab" data-tab="inventory">
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Weapons"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="weapon">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.weapon}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">{{localize "HOLLOW_KNIGHT.UI.Bulk"}}: {{this.system.bulk}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle">
+                                    <i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i>
+                                </button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Range"}}:</strong> <span style="text-transform: capitalize;">{{this.system.range}}</span> | <strong>{{localize "HOLLOW_KNIGHT.UI.Hands"}}:</strong> {{this.system.hands}}</p>
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Dmg"}}:</strong> {{this.system.damage}} | <strong>{{localize "HOLLOW_KNIGHT.UI.Q"}}:</strong> {{this.system.quality}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.ArmorShields"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="armor">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.armor}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">DR: {{this.system.damageReduction}} | {{localize "HOLLOW_KNIGHT.UI.Dur"}}: {{this.system.currentDurability}}/{{this.system.maxDurability}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle"><i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Bulk"}}:</strong> {{this.system.bulk}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{#each items.shield}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">Shield | Q: {{this.system.quality}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle"><i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Bulk"}}:</strong> {{this.system.bulk}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Consumables"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="consumable">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.consumable}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">{{localize "HOLLOW_KNIGHT.UI.Qty"}}: {{this.system.uses}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-consume"><i class="fas fa-cookie-bite"></i></button>
+                                <button type="button" class="item-roll"><i class="fas fa-flask"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{{this.system.description}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>{{localize "HOLLOW_KNIGHT.UI.Equipment"}}</h3>
+                    <button type="button" class="add-btn item-create" data-type="equipment">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.equipment}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">{{localize "HOLLOW_KNIGHT.UI.Bulk"}}: {{this.system.bulk}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle"><i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>{{localize "HOLLOW_KNIGHT.UI.Type"}}:</strong> <span style="text-transform:capitalize;">{{this.system.equipmentType}}</span></p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-flex-row hk-gap-md" style="padding: 0.75rem; margin: 0.5rem; justify-content: flex-end;">
+                <div class="hk-secondary-stat" style="flex: 1; max-width:200px;">
+                    <label>{{localize "HOLLOW_KNIGHT.UI.Geo"}}</label>
+                    <input type="number" name="system.currency.geo" value="{{system.currency.geo}}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="tab" data-tab="biography">
+            <div class="hk-biography">
+                <h3>{{localize "HOLLOW_KNIGHT.UI.Appearance"}}</h3>
+                <textarea name="system.details.appearance">{{system.details.appearance}}</textarea>
+            </div>
+            <div class="hk-biography">
+                <h3>{{localize "HOLLOW_KNIGHT.UI.Biography"}}</h3>
+                <textarea name="system.details.biography">{{system.details.biography}}</textarea>
+            </div>
+            <div class="hk-biography">
+                <h3>{{localize "HOLLOW_KNIGHT.UI.Notes"}}</h3>
+                <textarea name="system.details.notes">{{system.details.notes}}</textarea>
+            </div>
+        </div>
+    </section>
+</form>

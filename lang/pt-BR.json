@@ -1,0 +1,136 @@
+{
+  "HOLLOW_KNIGHT": {
+    "Attributes": {
+      "Might": "Poder",
+      "Insight": "Saber",
+      "Shell": "Casca",
+      "Grace": "Graça",
+      "Cute": "Fofura",
+      "Spook": "Assustador"
+    },
+    "Pools": {
+      "Heart": "Corações",
+      "Stamina": "Estamina",
+      "Soul": "Alma",
+      "Belly": "Bucho",
+      "Essence": "Essência",
+      "Stash": "Estoque",
+      "Lifeblood": "Sangue Vital",
+      "GStamina": "G. Stamina",
+      "GSoul": "G. Alma",
+      "GStash": "G. Estoque",
+      "Pluck": "Coragem"
+    },
+    "Secondary": {
+      "Speed": "Velocidade",
+      "Footwork": "Movimentação",
+      "Load": "Carga Máx.",
+      "BeltSize": "Tam. do Cinto",
+      "TechniqueSlots": "Espaços Téc.",
+      "Notches": "Encaixes",
+      "Absorption": "Absorção"
+    },
+    "Conditions": {
+      "OffBalance": "Desequilibrado",
+      "DeathsDoor": "À Beira da Morte",
+      "Unconscious": "Inconsciente",
+      "Dead": "Morto"
+    },
+    "ItemTypes": {
+      "Weapon": "Arma",
+      "Armor": "Armadura",
+      "Shield": "Escudo",
+      "Charm": "Amuleto",
+      "Art": "Arte de Arma",
+      "Arcana": "Arcana (Magia)",
+      "Trait": "Traço",
+      "Path": "Caminho",
+      "Consumable": "Consumível",
+      "Equipment": "Equipamento"
+    },
+    "ActorTypes": {
+      "Bug": "Inseto (PC)",
+      "NPC": "NPC",
+      "Creature": "Criatura"
+    },
+    "UI": {
+      "Species": "Espécie / Tipo",
+      "Size": "Tamanho",
+      "Sizes": {
+        "Tiny": "Minúsculo",
+        "Small": "Pequeno",
+        "Average": "Médio",
+        "Large": "Grande"
+      },
+      "Feral": "Feral",
+      "Hunger": "Fome",
+      "Base": "Base",
+      "Traits": "Traços",
+      "Proficiencies": "Proficiências & Perícias",
+      "Paths": "Caminhos",
+      "WeaponArts": "Artes de Arma",
+      "Conditions": "Condições",
+      "EquippedWeapons": "Armas Equipadas",
+      "Arcana": "Arcanas (Magias)",
+      "EquippedCharms": "Amuletos Equipados",
+      "AvailableCharms": "Amuletos Disponíveis",
+      "Weapons": "Armas",
+      "ArmorShields": "Armaduras & Escudos",
+      "Consumables": "Consumíveis",
+      "Equipment": "Equipamento",
+      "Notes": "Anotações",
+      "Appearance": "Aparência",
+      "Biography": "Biografia",
+      "BugName": "Nome do Inseto",
+      "Rank": "Ranque",
+      "Qty": "Qtd",
+      "Cost": "Custo",
+      "Dmg": "Dano",
+      "Q": "Qual",
+      "Dur": "Dur",
+      "Bulk": "Volume",
+      "Hands": "Mãos",
+      "Type": "Tipo",
+      "Range": "Alcance",
+      "ActionType": "Tipo de Ação",
+      "Geo": "Geo"
+    },
+    "Tabs": {
+      "Stats": "Atributos",
+      "Combat": "Combate",
+      "Magic": "Magia",
+      "Inventory": "Inventário",
+      "Bio": "História"
+    },
+    "Actions": {
+      "Break": "Pausa",
+      "RestSleep": "Descansar & Dormir",
+      "Roll": "Rolar",
+      "Attack": "Atacar",
+      "Cast": "Conjurar",
+      "Use": "Usar",
+      "Equip": "Equipar",
+      "Unequip": "Desequipar",
+      "Attune": "Sintonizar",
+      "Prepare": "Preparar"
+    },
+    "Chat": {
+      "AttributeCheck": "Teste de {attribute}",
+      "AttackRoll": "Ataque com {weapon}",
+      "SpellCast": "Conjuração de {spell}",
+      "SoakRoll": "Rolagem de Soak (Defesa)",
+      "Successes": "Sucessos",
+      "Damage": "Dano",
+      "SoulCost": "Custo de Alma",
+      "StaminaCost": "Custo de Estamina"
+    },
+    "Settings": {
+      "AutoSoak": "Rolagens Automáticas de Soak",
+      "AutoSoakHint": "Rola automaticamente o Soak quando dano é aplicado aos atores.",
+      "ShowRollDetails": "Mostrar Detalhes da Rolagem",
+      "ShowRollDetailsHint": "Exibe os resultados detalhados dos dados nas cartas de chat.",
+      "DeathDoorRecovery": "Recuperação na Beira da Morte",
+      "DeathDoorRecoveryHint": "Restaura a estamina ao máximo na primeira vez que o status 'À Beira da Morte' for ativado durante o combate."
+    }
+  }
+}

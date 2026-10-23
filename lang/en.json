@@ -1,0 +1,119 @@
+{
+  "HOLLOW_KNIGHT": {
+    "Attributes": {
+      "Might": "Might",
+      "Insight": "Insight",
+      "Shell": "Shell",
+      "Grace": "Grace",
+      "Cute": "Cute",
+      "Spook": "Spook"
+    },
+    "Pools": {
+      "Heart": "Hearts",
+      "Stamina": "Stamina",
+      "Soul": "Soul",
+      "Belly": "Belly",
+      "Essence": "Essence",
+      "Stash": "Stash",
+      "Lifeblood": "Lifeblood",
+      "GStamina": "G. Stamina",
+      "GSoul": "G. Soul",
+      "GStash": "G. Stash",
+      "Pluck": "Pluck"
+    },
+    "Secondary": {
+      "Speed": "Speed",
+      "Footwork": "Footwork",
+      "Load": "Load",
+      "BeltSize": "Belt Size",
+      "TechniqueSlots": "Tech. Slots",
+      "Notches": "Notches",
+      "Absorption": "Absorption"
+    },
+    "Conditions": {
+      "OffBalance": "Off-Balance",
+      "DeathsDoor": "At Death's Door",
+      "Unconscious": "Unconscious",
+      "Dead": "Dead"
+    },
+    "UI": {
+      "Species": "Species / Type",
+      "Size": "Size",
+      "Sizes": {
+        "Tiny": "Tiny",
+        "Small": "Small",
+        "Average": "Average",
+        "Large": "Large"
+      },
+      "Feral": "Feral",
+      "Hunger": "Hunger",
+      "Base": "Base",
+      "Traits": "Traits",
+      "Proficiencies": "Proficiencies & Skills",
+      "Paths": "Paths",
+      "WeaponArts": "Weapon Arts",
+      "Conditions": "Conditions",
+      "EquippedWeapons": "Equipped Weapons",
+      "Arcana": "Arcana (Spells)",
+      "EquippedCharms": "Equipped Charms",
+      "AvailableCharms": "Available Charms",
+      "Weapons": "Weapons",
+      "ArmorShields": "Armor & Shields",
+      "Consumables": "Consumables & Loot",
+      "Equipment": "Equipment",
+      "Notes": "Notes",
+      "Appearance": "Appearance",
+      "Biography": "Biography / Lore",
+      "BugName": "Bug Name",
+      "Rank": "Rank",
+      "Qty": "Qty",
+      "Cost": "Cost",
+      "Dmg": "Dmg",
+      "Q": "Q",
+      "Dur": "Dur",
+      "Bulk": "Bulk",
+      "Hands": "Hands",
+      "Type": "Type",
+      "Range": "Range",
+      "ActionType": "Action Type",
+      "Geo": "Geo"
+    },
+    "Tabs": {
+      "Stats": "Stats",
+      "Combat": "Combat",
+      "Magic": "Magic",
+      "Inventory": "Inventory",
+      "Bio": "Bio"
+    },
+    "Actions": {
+      "Break": "Break",
+      "RestSleep": "Rest & Sleep",
+      "Roll": "Roll",
+      "Attack": "Attack",
+      "Cast": "Cast",
+      "Use": "Use",
+      "Equip": "Equip",
+      "Unequip": "Unequip",
+      "Attune": "Attune",
+      "Prepare": "Prepare"
+    },
+    "Chat": {
+      "AttributeCheck": "{attribute} Check",
+      "AttackRoll": "{weapon} Attack",
+      "SpellCast": "{spell} Cast",
+      "SoakRoll": "Soak Roll",
+      "Successes": "Successes",
+      "Damage": "Damage",
+      "SoulCost": "Soul Cost",
+      "StaminaCost": "Stamina Cost"
+    },
+    "Settings": {
+      "AutoSoak": "Automatic Soak Rolls",
+      "AutoSoakHint": "Automatically roll soak when damage is applied to actors.",
+      "ShowRollDetails": "Show Roll Details",
+      "ShowRollDetailsHint": "Display detailed dice results in chat cards.",
+      "DeathDoorRecovery": "Death's Door Stamina Recovery",
+      "DeathDoorRecoveryHint": "Restore full stamina on first Death's Door trigger per rest."
+    }
+  }
+}

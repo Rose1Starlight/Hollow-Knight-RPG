@@ -1,0 +1,27 @@
+<div class="hk-chat-card hk-damage-card">
+ <div class="card-header">
+ <img src="{{actorImg}}" width="36" height="36" style="border-radius:50%;margin-right:8px;"/>
+ <h3>{{title}}</h3>
+ </div>
+ <div class="card-body">
+ <div class="damage-summary">
+ <span class="damage-value">{{damage}} Damage</span>
+ {{#if damageType}}
+ <span class="damage-type">({{damageType}})</span>
+ {{/if}}
+ </div>
+ {{#if soakRolled}}
+ <div class="soak-info">
+ <span>Incoming: {{incomingDamage}}</span>
+ <span>Soaked: {{soaked}}</span>
+ <span>Final: <strong>{{finalDamage}}</strong></span>
+ </div>
+ {{/if}}
+ {{#if appliedTo}}
+ <div class="target-info">Applied to: {{appliedTo}}</div>
+ {{/if}}
+ {{#if description}}
+ <div class="card-description">{{description}}</div>
+ {{/if}}
+ </div>
+</div>

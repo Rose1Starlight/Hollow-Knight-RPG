@@ -1,0 +1,112 @@
+{
+  "id": "hollow-knight-rpg",
+  "title": "The Unofficial Hollow Knight RPG",
+  "description": "A complete system implementation of The Unofficial Hollow Knight RPG for Foundry VTT v14. Adventures in a Dying Kingdom of Bugs.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "The Unofficial HK RPG Team (Original Creators)",
+      "url": "https://discord.gg/yPtUwjXbfJ"
+    },
+    {
+      "name": "Rose Starlight",
+      "discord": "@rose_starlight",
+      "url": "https://github.com/Rose1Starlight/hollow-knight-rpg"
+    }
+  ],
+  "esmodules": [
+    "module/hollow-knight.mjs"
+  ],
+  "styles": [
+    "css/hollow-knight.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "bug": {},
+      "npc": {},
+      "creature": {}
+    },
+    "Item": {
+      "weapon": {},
+      "armor": {},
+      "shield": {},
+      "charm": {},
+      "art": {},
+      "arcana": {},
+      "trait": {},
+      "path": {},
+      "consumable": {},
+      "equipment": {}
+    }
+  },
+  "packs": [
+    {
+      "name": "traits",
+      "label": "Traits",
+      "path": "packs/traits.db",
+      "type": "Item",
+      "system": "hollow-knight-rpg"
+    },
+    {
+      "name": "paths",
+      "label": "Paths",
+      "path": "packs/paths.db",
+      "type": "Item",
+      "system": "hollow-knight-rpg"
+    },
+    {
+      "name": "arts",
+      "label": "Weapon Arts",
+      "path": "packs/arts.db",
+      "type": "Item",
+      "system": "hollow-knight-rpg"
+    },
+    {
+      "name": "arcana",
+      "label": "Arcana",
+      "path": "packs/arcana.db",
+      "type": "Item",
+      "system": "hollow-knight-rpg"
+    },
+    {
+      "name": "charms",
+      "label": "Charms",
+      "path": "packs/charms.db",
+      "type": "Item",
+      "system": "hollow-knight-rpg"
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "path": "packs/equipment.db",
+      "type": "Item",
+      "system": "hollow-knight-rpg"
+    }
+  ],
+  "grid": {
+    "distance": 1,
+    "units": "sq"
+  },
+  "primaryTokenAttribute": "heart",
+  "secondaryTokenAttribute": "soul",
+  "background": "systems/hollow-knight-rpg/backgrounds/background.webp",
+  "url": "https://github.com/Rose1Starlight/hollow-knight-rpg",
+  "license": "LICENSE.txt",
+  "readme": "README.md"
+}

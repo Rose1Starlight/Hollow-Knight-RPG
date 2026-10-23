@@ -1,0 +1,45 @@
+<form class="hollow-knight sheet item art" autocomplete="off">
+  <header class="hk-item-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"/>
+    <div class="hk-item-details">
+      <input name="name" type="text" value="{{item.name}}" placeholder="Art Name"/>
+      <div class="hk-flex-row hk-gap-sm">
+        <select name="system.artType">
+          <option value="general" {{#if (eq system.artType "general")}}selected{{/if}}>General</option>
+          <option value="nail" {{#if (eq system.artType "nail")}}selected{{/if}}>Nail</option>
+          <option value="needle" {{#if (eq system.artType "needle")}}selected{{/if}}>Needle</option>
+          <option value="hook" {{#if (eq system.artType "hook")}}selected{{/if}}>Hook</option>
+          <option value="tusk" {{#if (eq system.artType "tusk")}}selected{{/if}}>Tusk</option>
+          <option value="sling" {{#if (eq system.artType "sling")}}selected{{/if}}>Sling</option>
+          <option value="shield" {{#if (eq system.artType "shield")}}selected{{/if}}>Shield</option>
+          <option value="natural" {{#if (eq system.artType "natural")}}selected{{/if}}>Natural</option>
+          <option value="unarmed" {{#if (eq system.artType "unarmed")}}selected{{/if}}>Unarmed</option>
+          <option value="counter" {{#if (eq system.artType "counter")}}selected{{/if}}>Counter</option>
+        </select>
+        <select name="system.actionType">
+          <option value="action" {{#if (eq system.actionType "action")}}selected{{/if}}>Action</option>
+          <option value="reaction" {{#if (eq system.actionType "reaction")}}selected{{/if}}>Reaction</option>
+          <option value="special" {{#if (eq system.actionType "special")}}selected{{/if}}>Special</option>
+        </select>
+      </div>
+    </div>
+  </header>
+  <section class="hk-item-stats">
+    <div class="hk-stat-row">
+      <label>Stamina Cost</label>
+      <input type="number" name="system.staminaCost" value="{{system.staminaCost}}" min="0"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Weapon Types</label>
+      <input type="text" name="system.weaponTypes" value="{{join system.weaponTypes ', '}}" placeholder="nail, needle, etc."/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Prepared</label>
+      <input type="checkbox" name="system.prepared" {{#if system.prepared}}checked{{/if}}/>
+    </div>
+  </section>
+  <section class="hk-biography">
+    <h3>Effect Description</h3>
+    <textarea name="system.effect" placeholder="Describe the Art's effect...">{{system.effect}}</textarea>
+  </section>
+</form>

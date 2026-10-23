@@ -1,0 +1,211 @@
+{
+  "Actor": {
+    "types": ["bug", "npc", "creature"],
+    "templates": {
+      "base": {
+        "attributes": {
+          "might": { "value": 3, "min": 0, "max": 7 },
+          "insight": { "value": 3, "min": 0, "max": 7 },
+          "shell": { "value": 3, "min": 0, "max": 7 },
+          "grace": { "value": 3, "min": 0, "max": 7 }
+        },
+        "secondaryAttributes": {
+          "cute": { "value": 1, "min": 0, "max": 7 },
+          "spook": { "value": 1, "min": 0, "max": 7 },
+          "speed": { "value": 6, "min": 0 },
+          "footwork": { "value": 3, "min": 0 },
+          "load": { "value": 3, "min": 0 },
+          "beltSize": { "value": 3, "min": 0 },
+          "techniqueSlots": { "value": 3, "min": 0 },
+          "notches": { "value": 3, "min": 0 },
+          "absorption": { "value": 0, "min": 0 }
+        },
+        "pools": {
+          "heart": { "value": 7, "min": 0, "max": 7 },
+          "stamina": { "value": 3, "min": 0, "max": 3 },
+          "soul": { "value": 3, "min": 0, "max": 3 },
+          "belly": { "value": 10, "min": -100, "max": 20 },
+          "essence": { "value": 0, "min": 0 },
+          "stash": { "value": 0, "min": 0, "max": 0 }
+        },
+        "gloryPools": {
+          "lifebloodHearts": { "value": 0, "min": 0 },
+          "gloryStamina": { "value": 0, "min": 0 },
+          "glorySoul": { "value": 0, "min": 0 },
+          "gloryStash": { "value": 0, "min": 0 },
+          "gloryPluck": { "value": 0, "min": 0 }
+        },
+        "conditions": {
+          "offBalance": { "value": 0, "min": 0, "max": 3 },
+          "statusEffects": [],
+          "dots": [],
+          "isDead": false,
+          "atDeathsDoor": false,
+          "isUnconscious": false
+        },
+        "details": {
+          "species": "",
+          "size": "average",
+          "hunger": { "value": 4, "min": -100, "max": 25 },
+          "bulk": 3,
+          "biography": "",
+          "appearance": ""
+        },
+        "proficiencies": {},
+        "paths": {}
+      }
+    },
+    "bug": {
+      "templates": ["base"],
+      "traits": [],
+      "naturalWeapons": [],
+      "attunedArts": [],
+      "attunedArcana": [],
+      "equippedCharms": [],
+      "inventory": {
+        "weapons": [],
+        "armor": [],
+        "shields": [],
+        "consumables": [],
+        "equipment": []
+      },
+      "advancement": {
+        "minorAdvancements": 0,
+        "mysticRanks": {},
+        "martialRanks": {}
+      }
+    },
+    "npc": {
+      "templates": ["base"],
+      "traits": [],
+      "naturalWeapons": [],
+      "arts": [],
+      "arcana": [],
+      "charms": [],
+      "crType": "",
+      "challengeRating": 0
+    },
+    "creature": {
+      "templates": ["base"],
+      "traits": [],
+      "naturalWeapons": [],
+      "isFeral": true,
+      "loot": []
+    }
+  },
+  "Item": {
+    "types": ["weapon", "armor", "shield", "charm", "art", "arcana", "trait", "path", "consumable", "equipment"],
+    "templates": {
+      "base": {
+        "description": "",
+        "rarity": "common",
+        "cost": 0,
+        "bulk": 1,
+        "source": ""
+      },
+      "equippable": {
+        "equipped": false,
+        "attuned": false
+      }
+    },
+    "weapon": {
+      "templates": ["base", "equippable"],
+      "weaponType": "",
+      "damage": 3,
+      "range": "melee",
+      "hands": "1H",
+      "quality": 1,
+      "upgradeTier": "none",
+      "modifier": "none",
+      "abilities": "",
+      "isNatural": false,
+      "isPaired": false
+    },
+    "armor": {
+      "templates": ["base", "equippable"],
+      "armorType": "light",
+      "maxDurability": 5,
+      "currentDurability": 5,
+      "damageReduction": 0,
+      "modifiers": [],
+      "soakBonus": 0
+    },
+    "shield": {
+      "templates": ["base", "equippable"],
+      "quality": 1,
+      "bulk": 1,
+      "upgradeTier": "none",
+      "modifier": "none"
+    },
+    "charm": {
+      "templates": ["base", "equippable"],
+      "charmType": "general",
+      "notchCost": 1,
+      "effect": "",
+      "pathAligned": ""
+    },
+    "art": {
+      "templates": ["base"],
+      "artType": "general",
+      "weaponTypes": [],
+      "staminaCost": 1,
+      "actionType": "action",
+      "effect": "",
+      "prepared": false
+    },
+    "arcana": {
+      "templates": ["base"],
+      "path": "",
+      "difficulty": 1,
+      "range": "touch",
+      "duration": "brief",
+      "soulCost": 1,
+      "effect": "",
+      "modifiers": [],
+      "attuned": false
+    },
+    "trait": {
+      "templates": ["base"],
+      "traitType": "attribute",
+      "hungerCost": 1,
+      "isSubTrait": false,
+      "parentTrait": "",
+      "effect": "",
+      "attributeModifiers": {},
+      "poolModifiers": {}
+    },
+    "path": {
+      "templates": ["base"],
+      "pathType": "martial",
+      "rank": 1,
+      "maxRank": 3,
+      "rank1Ability": "",
+      "rank2Ability": "",
+      "rank3Ability": "",
+      "bonusPool": "",
+      "bonusPerRank": 1,
+      "customBonusType": "none",
+      "customBonusValue": 1
+    },
+    "consumable": {
+      "templates": ["base"],
+      "consumableType": "food",
+      "uses": 1,
+      "effect": "",
+      "strain": 0,
+      "rejuvenating": false,
+      "stashCost": 1,
+      "bellyRestored": 0,
+      "heartRestored": 0,
+      "staminaRestored": 0,
+      "soulRestored": 0
+    },
+    "equipment": {
+      "templates": ["base", "equippable"],
+      "equipmentType": "tool",
+      "quality": 1,
+      "effect": "",
+      "beltSlot": false
+    }
+  }
+}

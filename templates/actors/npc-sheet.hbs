@@ -1,0 +1,694 @@
+<form class="hollow-knight sheet actor npc" autocomplete="off">
+    {{!-- Header Section --}}
+    <header class="hk-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="80" width="80"/>
+        <div class="header-details">
+            <input name="name" type="text" value="{{actor.name}}" placeholder="NPC Name"/>
+            <div class="hk-flex-row hk-gap-md" style="margin-top: 0.5rem; display:flex; align-items:center;">
+                <div class="hk-secondary-stat" style="flex: 1.5;">
+                    <label>Species / Type</label>
+                    <input type="text" name="system.details.species" value="{{system.details.species}}" class="inline-edit" data-field="system.details.species" placeholder="e.g., Mantis..." style="width: 100%; border:none; background:transparent; border-bottom:1px solid var(--hk-border);"/>
+                </div>
+                <div class="hk-secondary-stat" style="flex: 1;">
+                    <label>Size</label>
+                    <select name="system.details.size" class="inline-edit" data-field="system.details.size">
+                        <option value="tiny" {{#if (eq system.details.size "tiny")}}selected{{/if}}>Tiny</option>
+                        <option value="small" {{#if (eq system.details.size "small")}}selected{{/if}}>Small</option>
+                        <option value="average" {{#if (eq system.details.size "average")}}selected{{/if}}>Average</option>
+                        <option value="large" {{#if (eq system.details.size "large")}}selected{{/if}}>Large</option>
+                    </select>
+                </div>
+                <div class="hk-secondary-stat" style="flex: 1; display:flex; justify-content:flex-end; gap:10px; align-items:center;">
+                    <label>Hunger</label>
+                    <span class="sec-val" title="Size Base + Traits Cost">{{system.details.hunger.value}}</span>
+                </div>
+                <div class="hk-secondary-stat" style="flex: 1; display:flex; justify-content:flex-end; gap:10px; align-items:center;">
+                    <label>Belly</label>
+                    <input type="number" name="system.pools.belly.value" value="{{system.pools.belly.value}}" class="inline-edit" data-field="system.pools.belly.value" style="width:40px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border-light);" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Navigation Tabs --}}
+    <nav class="hk-tabs">
+        <a class="item active" data-tab="stats">Stats</a>
+        <a class="item" data-tab="combat">Combat</a>
+        <a class="item" data-tab="magic">Magic</a>
+        <a class="item" data-tab="inventory">Inventory</a>
+        <a class="item" data-tab="biography">Bio</a>
+    </nav>
+
+    {{!-- Tab Content --}}
+    <section class="hk-tab-content">
+
+        {{!-- STATS TAB --}}
+        <div class="tab active" data-tab="stats">
+            {{!-- Primary Attributes --}}
+            <div class="hk-attributes">
+                <div class="hk-attribute might">
+                    <label class="attr-rollable" data-attribute="might" title="Roll Might">Might</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="might" title="Base + Traits + Advancements">{{system.attributes.might.value}}</div>
+                        <input type="number" class="attr-bonus inline-edit" name="system.attributes.might.bonus" value="{{system.attributes.might.bonus}}" step="0.5" data-field="system.attributes.might.bonus" title="Manual Bonus" placeholder="+0" />
+                    </div>
+                </div>
+                <div class="hk-attribute insight">
+                    <label class="attr-rollable" data-attribute="insight" title="Roll Insight">Insight</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="insight" title="Base + Traits + Advancements">{{system.attributes.insight.value}}</div>
+                        <input type="number" class="attr-bonus inline-edit" name="system.attributes.insight.bonus" value="{{system.attributes.insight.bonus}}" step="0.5" data-field="system.attributes.insight.bonus" title="Manual Bonus" placeholder="+0" />
+                    </div>
+                </div>
+                <div class="hk-attribute shell">
+                    <label class="attr-rollable" data-attribute="shell" title="Roll Shell">Shell</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="shell" title="Base + Traits + Advancements">{{system.attributes.shell.value}}</div>
+                        <input type="number" class="attr-bonus inline-edit" name="system.attributes.shell.bonus" value="{{system.attributes.shell.bonus}}" step="0.5" data-field="system.attributes.shell.bonus" title="Manual Bonus" placeholder="+0" />
+                    </div>
+                </div>
+                <div class="hk-attribute grace">
+                    <label class="attr-rollable" data-attribute="grace" title="Roll Grace">Grace</label>
+                    <div class="attr-box">
+                        <div class="attr-calc attr-rollable" data-attribute="grace" title="Base + Traits + Advancements">{{system.attributes.grace.value}}</div>
+                        <input type="number" class="attr-bonus inline-edit" name="system.attributes.grace.bonus" value="{{system.attributes.grace.bonus}}" step="0.5" data-field="system.attributes.grace.bonus" title="Manual Bonus" placeholder="+0" />
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Pools --}}
+            <div class="hk-pools">
+                <div class="hk-pool heart">
+                    <label>Hearts</label>
+                    <div class="pool-values">
+                        <button type="button" class="pool-adjust" data-pool="heart" data-delta="-1">−</button>
+                        <input type="number" name="system.pools.heart.value" value="{{system.pools.heart.value}}" readonly/>
+                        <span class="separator">/</span>
+                        <input type="number" name="system.pools.heart.max" value="{{system.pools.heart.max}}" readonly/>
+                        <button type="button" class="pool-adjust" data-pool="heart" data-delta="1">+</button>
+                    </div>
+                    <div style="display:flex; gap: 4px; margin-top: 6px;">
+                        <button type="button" class="apply-damage" title="Take Damage" style="background:var(--hk-accent-red); color:white; border:1px solid #ff4d4d; padding:2px 8px; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.8rem;"><i class="fas fa-skull"></i> Damage</button>
+                        <button type="button" class="apply-heal" title="Heal/Restore" style="background:var(--hk-accent-green); color:#1a1c23; border:1px solid #7ed4a0; padding:2px 8px; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.8rem;"><i class="fas fa-heart"></i> Heal</button>
+                    </div>
+                </div>
+                <div class="hk-pool stamina">
+                    <label>Stamina</label>
+                    <div class="pool-values">
+                        <button type="button" class="pool-adjust" data-pool="stamina" data-delta="-1">−</button>
+                        <input type="number" name="system.pools.stamina.value" value="{{system.pools.stamina.value}}" readonly/>
+                        <span class="separator">/</span>
+                        <input type="number" name="system.pools.stamina.max" value="{{system.pools.stamina.max}}" readonly/>
+                        <button type="button" class="pool-adjust" data-pool="stamina" data-delta="1">+</button>
+                    </div>
+                </div>
+                <div class="hk-pool soul">
+                    <label>Soul</label>
+                    <div class="pool-values">
+                        <button type="button" class="pool-adjust" data-pool="soul" data-delta="-1">−</button>
+                        <input type="number" name="system.pools.soul.value" value="{{system.pools.soul.value}}" readonly/>
+                        <span class="separator">/</span>
+                        <input type="number" name="system.pools.soul.max" value="{{system.pools.soul.max}}" readonly/>
+                        <button type="button" class="pool-adjust" data-pool="soul" data-delta="1">+</button>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Lifeblood, Glory & Extras --}}
+            <div class="hk-list-section" style="margin-top: 15px; margin-bottom: 15px; padding: 10px; background: rgba(0,0,0,0.15); border: 1px solid var(--hk-border); border-radius: 6px;">
+                <div style="font-family: var(--hk-font-header); color: var(--hk-text-primary); border-bottom: 1px solid var(--hk-border); margin-bottom: 8px; padding-bottom: 4px;">Lifeblood, Glory & Extras</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px;">
+                    
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-accent-blue); margin-bottom:4px;">Lifeblood</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="lifebloodHearts" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" class="inline-edit" name="system.gloryPools.lifebloodHearts.value" value="{{system.gloryPools.lifebloodHearts.value}}" data-field="system.gloryPools.lifebloodHearts.value" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="lifebloodHearts" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-stamina-color); margin-bottom:4px;">G. Stamina</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="gloryStamina" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" class="inline-edit" name="system.gloryPools.gloryStamina.value" value="{{system.gloryPools.gloryStamina.value}}" data-field="system.gloryPools.gloryStamina.value" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="gloryStamina" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-soul-color); margin-bottom:4px;">G. Soul</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="glorySoul" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" class="inline-edit" name="system.gloryPools.glorySoul.value" value="{{system.gloryPools.glorySoul.value}}" data-field="system.gloryPools.glorySoul.value" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="glorySoul" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-accent-gold); margin-bottom:4px;">G. Stash</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="gloryStash" data-glory="true" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" class="inline-edit" name="system.gloryPools.gloryStash.value" value="{{system.gloryPools.gloryStash.value}}" data-field="system.gloryPools.gloryStash.value" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="gloryStash" data-glory="true" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-text-secondary); margin-bottom:4px;">Pluck</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="pluck" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" class="inline-edit" name="system.pools.pluck.value" value="{{system.pools.pluck.value}}" data-field="system.pools.pluck.value" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="pluck" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <label style="font-size:0.75rem; color: var(--hk-text-secondary); margin-bottom:4px;">Stash (Base)</label>
+                        <div style="display:flex; align-items:center; gap:4px;">
+                            <button type="button" class="pool-adjust" data-pool="stash" data-delta="-1" style="width:20px; height:20px; line-height:16px;">−</button>
+                            <input type="number" class="inline-edit" name="system.pools.stash.value" value="{{system.pools.stash.value}}" data-field="system.pools.stash.value" style="width:30px; text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--hk-border);" />
+                            <button type="button" class="pool-adjust" data-pool="stash" data-delta="1" style="width:20px; height:20px; line-height:16px;">+</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {{!-- Secondary Attributes --}}
+            <div class="hk-secondary">
+                <div class="hk-secondary-stat">
+                    <label class="attr-rollable" data-attribute="cute" title="Roll Cute">Cute</label>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                        <span class="sec-val attr-rollable" data-attribute="cute" title="Total: Base + Others">{{system.secondaryAttributes.cute.value}}</span>
+                        <input type="number" class="sec-bonus inline-edit" name="system.secondaryAttributes.cute.sizeAllocation" value="{{system.secondaryAttributes.cute.sizeAllocation}}" step="0.5" data-field="system.secondaryAttributes.cute.sizeAllocation" title="Base Bonus (Size)" placeholder="Base"/>
+                        <input type="number" class="sec-bonus inline-edit" name="system.secondaryAttributes.cute.bonus" value="{{system.secondaryAttributes.cute.bonus}}" step="0.5" data-field="system.secondaryAttributes.cute.bonus" title="Other Bonuses" placeholder="+0"/>
+                    </div>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label class="attr-rollable" data-attribute="spook" title="Roll Spook">Spook</label>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                        <span class="sec-val attr-rollable" data-attribute="spook" title="Total: Base + Others">{{system.secondaryAttributes.spook.value}}</span>
+                        <input type="number" class="sec-bonus inline-edit" name="system.secondaryAttributes.spook.sizeAllocation" value="{{system.secondaryAttributes.spook.sizeAllocation}}" step="0.5" data-field="system.secondaryAttributes.spook.sizeAllocation" title="Base Bonus (Size)" placeholder="Base"/>
+                        <input type="number" class="sec-bonus inline-edit" name="system.secondaryAttributes.spook.bonus" value="{{system.secondaryAttributes.spook.bonus}}" step="0.5" data-field="system.secondaryAttributes.spook.bonus" title="Other Bonuses" placeholder="+0"/>
+                    </div>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>Speed</label>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="sec-val" title="Calculated Automatically">{{system.secondaryAttributes.speed.value}}</span>
+                        <input type="number" class="sec-bonus inline-edit" name="system.secondaryAttributes.speed.bonus" value="{{system.secondaryAttributes.speed.bonus}}" data-field="system.secondaryAttributes.speed.bonus" title="Extra Advancements" placeholder="+0"/>
+                    </div>
+                </div>
+                <div class="hk-secondary-stat">
+                    <label>Absorption</label>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="sec-val" title="Calculated Automatically">{{system.secondaryAttributes.absorption.value}}</span>
+                        <input type="number" class="sec-bonus inline-edit" name="system.secondaryAttributes.absorption.bonus" value="{{system.secondaryAttributes.absorption.bonus}}" data-field="system.secondaryAttributes.absorption.bonus" title="Manual Bonuses" placeholder="+0"/>
+                    </div>
+                </div>
+                
+                <div class="hk-secondary-stat" title="Calculated from Grace / 2">
+                    <label>Footwork</label>
+                    <span class="sec-val">{{system.secondaryAttributes.footwork.value}}</span>
+                </div>
+                <div class="hk-secondary-stat" title="Equals Might">
+                    <label>Load</label>
+                    <span class="sec-val">{{system.secondaryAttributes.load.value}}</span>
+                </div>
+                <div class="hk-secondary-stat" title="Equals Shell">
+                    <label>Belt Size</label>
+                    <span class="sec-val">{{system.secondaryAttributes.beltSize.value}}</span>
+                </div>
+                <div class="hk-secondary-stat" title="Equals Insight">
+                    <label>Tech. Slots</label>
+                    <span class="sec-val">{{system.secondaryAttributes.techniqueSlots.value}}</span>
+                </div>
+            </div>
+
+            {{!-- Notches Display --}}
+            <div class="hk-notches">
+                <label>Notches:</label>
+                {{#each (range derived.notchMax)}}
+                <div class="hk-notch {{#if (lt this ../derived.notchUsage)}}filled{{/if}}"></div>
+                {{/each}}
+                <span style="margin-left: 0.5rem; font-size: 0.8rem; color: {{#if derived.isOvercharmed}}var(--hk-accent-red){{else}}var(--hk-text-secondary){{/if}};">
+                    {{derived.notchUsage}} / {{derived.notchMax}}
+                </span>
+            </div>
+
+            {{!-- Traits List --}}
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Traits</h3>
+                    <button type="button" class="add-btn item-create" data-type="trait">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each traitHierarchy}}
+                    <div class="hk-item-container" data-item-id="{{this.parent.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.parent.name}}</span>
+                            <span class="item-details">Hunger: {{this.parent.system.hungerCost}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{#if this.parent.system.effect}}<p><strong>Effect:</strong> {{{this.parent.system.effect}}}</p>{{/if}}
+                            {{{this.parent.system.description}}}
+                        </div>
+                    </div>
+                    
+                    {{#each this.children}}
+                    <div class="hk-item-container hk-subtrait-row" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">↳ {{this.name}}</span>
+                            <span class="item-details">Hunger: {{this.system.hungerCost}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{#if this.system.effect}}<p><strong>Effect:</strong> {{{this.system.effect}}}</p>{{/if}}
+                            {{{this.system.description}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- Proficiencies & Skills --}}
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Proficiencies & Skills</h3>
+                    <button type="button" class="add-btn prof-create">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each proficiencies}}
+                    <div class="hk-prof-container" data-prof-id="{{this.id}}">
+                        <div class="hk-prof-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <button type="button" class="prof-roll" title="Roll General Proficiency" style="width:24px; height:24px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--hk-accent-blue); cursor:pointer;"><i class="fas fa-dice-d6"></i></button>
+                            
+                            <span class="item-name" style="flex:1; font-weight:bold; color:var(--hk-text-primary);">{{this.name}}</span>
+                            
+                            <span class="item-details" style="margin-right:10px;">Ranks: {{this.rank}}</span>
+                            
+                            <div class="item-controls">
+                                <button type="button" class="prof-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="prof-delete delete" title="Remove"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            {{#if this.skillList.length}}
+                            <div style="margin-bottom: 15px;">
+                                <label style="font-size: 0.8rem; color:var(--hk-accent-blue); display:block; margin-bottom:6px;">Roll Skills (Chips):</label>
+                                <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                                    {{#each this.skillList}}
+                                    <button type="button" class="prof-roll skill-chip" data-skill-name="{{this}}" title="Roll {{this}}"><i class="fas fa-dice-d6"></i> {{this}}</button>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            {{/if}}
+                            
+                            {{#if this.description}}
+                            <div style="color:var(--hk-text-secondary); font-size:0.9rem;">
+                                <label style="font-size: 0.8rem; color:var(--hk-accent-blue); display:block; margin-bottom:2px;">Description / Effect:</label>
+                                <p style="margin:0;">{{this.description}}</p>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- Paths List --}}
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Paths</h3>
+                    <button type="button" class="add-btn item-create" data-type="path">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.path}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-accent-blue);">Rank {{this.system.rank}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Path Type:</strong> <span style="text-transform: capitalize;">{{this.system.pathType}}</span></p>
+                            {{#if this.system.rank1Ability}}<p style="margin-top:8px;"><strong>Rank 1:</strong> {{{this.system.rank1Ability}}}</p>{{/if}}
+                            {{#if this.system.rank2Ability}}<p style="margin-top:8px;"><strong>Rank 2:</strong> {{{this.system.rank2Ability}}}</p>{{/if}}
+                            {{#if this.system.rank3Ability}}<p style="margin-top:8px;"><strong>Rank 3:</strong> {{{this.system.rank3Ability}}}</p>{{/if}}
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border);"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- Rest Buttons --}}
+            <div class="hk-flex-row hk-gap-md" style="padding: 0.75rem; margin: 0.5rem;">
+                <button type="button" class="rest-btn" data-slept="false" style="flex:1; padding: 0.5rem; background: var(--hk-bg-panel); border: 1px solid var(--hk-border); border-radius: var(--hk-radius-sm); color: var(--hk-text-primary); cursor: pointer;">Break</button>
+                <button type="button" class="rest-btn" data-slept="true" style="flex:1; padding: 0.5rem; background: var(--hk-accent-blue-dim); border: 1px solid var(--hk-accent-blue); border-radius: var(--hk-radius-sm); color: var(--hk-bg-dark); cursor: pointer; font-weight: 600;">Rest & Sleep</button>
+            </div>
+        </div>
+
+        {{!-- COMBAT TAB --}}
+        <div class="tab" data-tab="combat">
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Weapon Arts</h3>
+                    <button type="button" class="add-btn item-create" data-type="art">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.art}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name item-roll" style="cursor: pointer;">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-stamina-color);">{{this.system.staminaCost}} STA</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-roll" title="Use"><i class="fas fa-dice-d6"></i></button>
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Action Type:</strong> <span style="text-transform: capitalize;">{{this.system.actionType}}</span> | <strong>Weapon Types:</strong> {{#if this.system.weaponTypes}}{{join this.system.weaponTypes ', '}}{{else}}Any{{/if}}</p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Conditions</h3>
+                </div>
+                <div class="hk-secondary">
+                    <div class="hk-secondary-stat">
+                        <label>Off-Balance</label>
+                        <input type="number" name="system.conditions.offBalance.value" value="{{system.conditions.offBalance.value}}" min="0" max="3" class="inline-edit" data-field="system.conditions.offBalance.value"/>
+                    </div>
+                    <div class="hk-secondary-stat">
+                        <label>At Death's Door</label>
+                        <input type="checkbox" name="system.conditions.atDeathsDoor" {{#if system.conditions.atDeathsDoor}}checked{{/if}} class="inline-edit" data-field="system.conditions.atDeathsDoor"/>
+                    </div>
+                    <div class="hk-secondary-stat">
+                        <label>Unconscious</label>
+                        <input type="checkbox" name="system.conditions.isUnconscious" {{#if system.conditions.isUnconscious}}checked{{/if}} class="inline-edit" data-field="system.conditions.isUnconscious"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Equipped Weapons</h3>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.weapon}}
+                    {{#if this.system.equipped}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name item-roll" style="cursor: pointer;">{{this.name}}</span>
+                            <span class="item-details">Dmg: {{this.system.damage}} | Q: {{this.system.quality}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-roll" title="Attack"><i class="fas fa-dice-d6"></i></button>
+                                <button type="button" class="item-toggle" title="Unequip"><i class="fas fa-shield-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Range:</strong> <span style="text-transform: capitalize;">{{this.system.range}}</span> | <strong>Hands:</strong> {{this.system.hands}} | <strong>Type:</strong> {{this.system.weaponType}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        {{!-- MAGIC TAB --}}
+        <div class="tab" data-tab="magic">
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Arcana (Spells)</h3>
+                    <button type="button" class="add-btn item-create" data-type="arcana">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.arcana}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name item-roll" style="cursor: pointer;">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-soul-color);">{{this.system.soulCost}} Soul | Diff: {{this.system.difficulty}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-roll" title="Cast"><i class="fas fa-magic"></i></button>
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Path:</strong> {{#if this.system.path}}{{this.system.path}}{{else}}General{{/if}} | <strong>Range:</strong> <span style="text-transform:capitalize;">{{this.system.range}}</span> | <strong>Duration:</strong> <span style="text-transform:capitalize;">{{this.system.duration}}</span></p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Equipped Charms</h3>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.charm}}
+                    {{#if this.system.equipped}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details" style="color: var(--hk-accent-gold);">{{this.system.notchCost}} Notch(es)</span>
+                            <div class="item-controls">
+                                <button type="button" class="charm-toggle" title="Unequip"><i class="fas fa-circle"></i></button>
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Type:</strong> <span style="text-transform:capitalize;">{{this.system.charmType}}</span> {{#if this.system.pathAligned}}| <strong>Path:</strong> {{this.system.pathAligned}}{{/if}}</p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Available Charms</h3>
+                    <button type="button" class="add-btn item-create" data-type="charm">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.charm}}
+                    {{#unless this.system.equipped}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">{{this.system.notchCost}} Notch(es)</span>
+                            <div class="item-controls">
+                                <button type="button" class="charm-toggle" title="Equip"><i class="far fa-circle"></i></button>
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Type:</strong> <span style="text-transform:capitalize;">{{this.system.charmType}}</span> {{#if this.system.pathAligned}}| <strong>Path:</strong> {{this.system.pathAligned}}{{/if}}</p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/unless}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        {{!-- INVENTORY TAB --}}
+        <div class="tab" data-tab="inventory">
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Weapons</h3>
+                    <button type="button" class="add-btn item-create" data-type="weapon">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.weapon}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">Bulk: {{this.system.bulk}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle" title="{{#if this.system.equipped}}Unequip{{else}}Equip{{/if}}">
+                                    <i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i>
+                                </button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Range:</strong> <span style="text-transform: capitalize;">{{this.system.range}}</span> | <strong>Hands:</strong> {{this.system.hands}} | <strong>Type:</strong> {{this.system.weaponType}}</p>
+                            <p><strong>Damage:</strong> {{this.system.damage}} | <strong>Quality:</strong> {{this.system.quality}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Armor & Shields</h3>
+                    <button type="button" class="add-btn item-create" data-type="armor">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.armor}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">DR: {{this.system.damageReduction}} | Dur: {{this.system.currentDurability}}/{{this.system.maxDurability}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle"><i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Type:</strong> <span style="text-transform:capitalize;">{{this.system.armorType}}</span> | <strong>Bulk:</strong> {{this.system.bulk}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{#each items.shield}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">Shield | Q: {{this.system.quality}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle"><i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Bulk:</strong> {{this.system.bulk}}</p>
+                            {{#if this.system.description}}<hr style="border-color:var(--hk-border); margin:4px 0;"><p>{{{this.system.description}}}</p>{{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Consumables</h3>
+                    <button type="button" class="add-btn item-create" data-type="consumable">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.consumable}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">Qty: {{this.system.uses}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-consume" title="Consume / Use"><i class="fas fa-cookie-bite"></i></button>
+                                <button type="button" class="item-roll" title="Post to Chat"><i class="fas fa-flask"></i></button>
+                                <button type="button" class="item-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Type:</strong> <span style="text-transform:capitalize;">{{this.system.consumableType}}</span></p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-list-section">
+                <div class="hk-list-header">
+                    <h3>Equipment</h3>
+                    <button type="button" class="add-btn item-create" data-type="equipment">+</button>
+                </div>
+                <div class="hk-item-list">
+                    {{#each items.equipment}}
+                    <div class="hk-item-container" data-item-id="{{this.id}}">
+                        <div class="hk-item-row">
+                            <button type="button" class="item-expand"><i class="fas fa-chevron-right"></i></button>
+                            <span class="item-name">{{this.name}}</span>
+                            <span class="item-details">Bulk: {{this.system.bulk}}</span>
+                            <div class="item-controls">
+                                <button type="button" class="item-toggle"><i class="fas {{#if this.system.equipped}}fa-check{{else}}fa-plus{{/if}}"></i></button>
+                                <button type="button" class="item-edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="item-delete delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="hk-item-summary hk-hidden">
+                            <p><strong>Type:</strong> <span style="text-transform:capitalize;">{{this.system.equipmentType}}</span></p>
+                            <hr style="border-color:var(--hk-border); margin:4px 0;">
+                            {{{this.system.effect}}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="hk-flex-row hk-gap-md" style="padding: 0.75rem; margin: 0.5rem; justify-content: flex-end;">
+                <div class="hk-secondary-stat" style="flex: 1; max-width:200px;">
+                    <label>Geo</label>
+                    <input type="number" name="system.currency.geo" value="{{system.currency.geo}}" class="inline-edit" data-field="system.currency.geo"/>
+                </div>
+            </div>
+        </div>
+
+        {{!-- BIOGRAPHY TAB --}}
+        <div class="tab" data-tab="biography">
+            <div class="hk-biography">
+                <h3>Appearance</h3>
+                <textarea name="system.details.appearance" placeholder="Describe the NPC's appearance..." class="inline-edit" data-field="system.details.appearance">{{system.details.appearance}}</textarea>
+            </div>
+            <div class="hk-biography">
+                <h3>Biography / Lore</h3>
+                <textarea name="system.details.biography" placeholder="NPC story..." class="inline-edit" data-field="system.details.biography">{{system.details.biography}}</textarea>
+            </div>
+            <div class="hk-biography">
+                <h3>Notes</h3>
+                <textarea name="system.details.notes" placeholder="Session notes, plot points..." class="inline-edit" data-field="system.details.notes">{{system.details.notes}}</textarea>
+            </div>
+        </div>
+    </section>
+</form>

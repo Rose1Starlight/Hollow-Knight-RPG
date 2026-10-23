@@ -1,0 +1,61 @@
+<form class="hollow-knight sheet item armor" autocomplete="off">
+  <header class="hk-item-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"/>
+    <div class="hk-item-details">
+      <input name="name" type="text" value="{{item.name}}" placeholder="Armor Name"/>
+      <div class="hk-flex-row hk-gap-sm">
+        <select name="system.rarity">
+          <option value="common" {{#if (eq system.rarity "common")}}selected{{/if}}>Common</option>
+          <option value="uncommon" {{#if (eq system.rarity "uncommon")}}selected{{/if}}>Uncommon</option>
+          <option value="rare" {{#if (eq system.rarity "rare")}}selected{{/if}}>Rare</option>
+          <option value="legendary" {{#if (eq system.rarity "legendary")}}selected{{/if}}>Legendary</option>
+        </select>
+        <label style="font-size:0.8rem; color:var(--hk-text-secondary); display:flex; align-items:center; gap:0.25rem;">
+          <input type="checkbox" name="system.equipped" {{#if system.equipped}}checked{{/if}}/> Equipped
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <section class="hk-item-stats">
+    <div class="hk-stat-row">
+      <label>Type</label>
+      <select name="system.armorType">
+        <option value="light" {{#if (eq system.armorType "light")}}selected{{/if}}>Light Armor</option>
+        <option value="medium" {{#if (eq system.armorType "medium")}}selected{{/if}}>Medium Armor</option>
+        <option value="heavy" {{#if (eq system.armorType "heavy")}}selected{{/if}}>Heavy Armor</option>
+        <option value="shield" {{#if (eq system.armorType "shield")}}selected{{/if}}>Shield</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Damage Reduction</label>
+      <input type="number" name="system.damageReduction" value="{{system.damageReduction}}" min="0"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Max Durability</label>
+      <input type="number" name="system.maxDurability" value="{{system.maxDurability}}" min="0"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Current Durability</label>
+      <input type="number" name="system.currentDurability" value="{{system.currentDurability}}" min="0"/>
+    </div>
+    <div class="hk-stat-row">
+      <label>Bulk</label>
+      <select name="system.bulk">
+        <option value="light" {{#if (eq system.bulk "light")}}selected{{/if}}>Light</option>
+        <option value="1" {{#if (eq system.bulk "1")}}selected{{/if}}>1</option>
+        <option value="2" {{#if (eq system.bulk "2")}}selected{{/if}}>2</option>
+        <option value="3" {{#if (eq system.bulk "3")}}selected{{/if}}>3</option>
+      </select>
+    </div>
+    <div class="hk-stat-row">
+      <label>Cost (Geo)</label>
+      <input type="number" name="system.cost" value="{{system.cost}}" min="0"/>
+    </div>
+  </section>
+
+  <section class="hk-biography">
+    <h3>Description & Modifiers</h3>
+    <textarea name="system.description" placeholder="Armor description and modifiers...">{{system.description}}</textarea>
+  </section>
+</form>

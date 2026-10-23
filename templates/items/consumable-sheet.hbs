@@ -1,0 +1,64 @@
+<form class="{{cssClass}}" autocomplete="off" style="padding: 10px;">
+    <header class="sheet-header" style="display: flex; gap: 15px; margin-bottom: 15px;">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" style="width: 80px; height: 80px; border: 1px solid var(--hk-border); border-radius: 4px; background: rgba(0,0,0,0.5);"/>
+        <div class="header-fields" style="flex: 1;">
+            <h1 class="charname" style="margin: 0; padding: 0; border-bottom: 1px solid var(--hk-accent-blue);">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Consumable Name" style="width: 100%; font-size: 1.8rem; background: transparent; border: none; color: var(--hk-text-primary);"/>
+            </h1>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <div style="flex: 1;">
+                    <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;">Type</label>
+                    <select name="system.consumableType" style="width: 100%; padding: 4px; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border);">
+                        <option value="food" {{#if (eq system.consumableType "food")}}selected{{/if}}>Food</option>
+                        <option value="potion" {{#if (eq system.consumableType "potion")}}selected{{/if}}>Potion / Alcohol</option>
+                        <option value="flask" {{#if (eq system.consumableType "flask")}}selected{{/if}}>Flask</option>
+                        <option value="poison" {{#if (eq system.consumableType "poison")}}selected{{/if}}>Poison</option>
+                        <option value="trap" {{#if (eq system.consumableType "trap")}}selected{{/if}}>Trap</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;">Rarity</label>
+                    <select name="system.rarity" style="width: 100%; padding: 4px; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border);">
+                        <option value="common" {{#if (eq system.rarity "common")}}selected{{/if}}>Common</option>
+                        <option value="uncommon" {{#if (eq system.rarity "uncommon")}}selected{{/if}}>Uncommon</option>
+                        <option value="rare" {{#if (eq system.rarity "rare")}}selected{{/if}}>Rare</option>
+                        <option value="legendary" {{#if (eq system.rarity "legendary")}}selected{{/if}}>Legendary</option>
+                    </select>
+                </div>
+                <div style="flex: 0.5;">
+                    <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;">Qty/Doses</label>
+                    <input type="number" name="system.uses" value="{{system.uses}}" style="width: 100%; padding: 4px; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border); text-align: center;" />
+                </div>
+                <div style="flex: 0.5;">
+                    <label style="color: var(--hk-accent-blue); font-weight: bold; font-size: 0.85rem;">Cost</label>
+                    <input type="number" name="system.cost" value="{{system.cost}}" style="width: 100%; padding: 4px; background: var(--hk-bg-panel); color: var(--hk-text-primary); border: 1px solid var(--hk-border); text-align: center;" />
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-top: 10px; background: rgba(0,0,0,0.2); padding: 5px; border-radius: 4px; border: 1px solid var(--hk-border-light);">
+                <div style="flex: 1; text-align: center;">
+                    <label style="color: var(--hk-text-secondary); font-size: 0.75rem;">+ Belly</label>
+                    <input type="number" name="system.bellyRestored" value="{{system.bellyRestored}}" style="width: 100%; padding: 2px; background: var(--hk-bg-dark); color: var(--hk-text-primary); border: 1px solid var(--hk-border); text-align: center;" />
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <label style="color: var(--hk-heart-color); font-size: 0.75rem;">+ Heart</label>
+                    <input type="number" name="system.heartRestored" value="{{system.heartRestored}}" style="width: 100%; padding: 2px; background: var(--hk-bg-dark); color: var(--hk-text-primary); border: 1px solid var(--hk-border); text-align: center;" />
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <label style="color: var(--hk-stamina-color); font-size: 0.75rem;">+ Stamina</label>
+                    <input type="number" name="system.staminaRestored" value="{{system.staminaRestored}}" style="width: 100%; padding: 2px; background: var(--hk-bg-dark); color: var(--hk-text-primary); border: 1px solid var(--hk-border); text-align: center;" />
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <label style="color: var(--hk-soul-color); font-size: 0.75rem;">+ Soul</label>
+                    <input type="number" name="system.soulRestored" value="{{system.soulRestored}}" style="width: 100%; padding: 2px; background: var(--hk-bg-dark); color: var(--hk-text-primary); border: 1px solid var(--hk-border); text-align: center;" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="sheet-body" style="height: calc(100% - 160px); overflow-y: auto; padding-right: 5px;">
+        <div style="height: 100%; min-height: 150px; background: var(--hk-bg-panel); border: 1px solid var(--hk-border); padding: 8px; border-radius: 4px; color: var(--hk-text-primary); display: flex; flex-direction: column;">
+            {{editor enrichedDescription target="system.description" engine="prosemirror" button=true owner=owner editable=true}}
+        </div>
+    </section>
+</form>
