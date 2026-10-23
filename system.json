@@ -107,9 +107,8 @@
   "secondaryTokenAttribute": "soul",
   "background": "systems/hollow-knight-rpg/backgrounds/background.webp",
   "url": "https://github.com/Rose1Starlight/hollow-knight-rpg",
+  "manifest": "https://raw.githubusercontent.com/Rose1Starlight/hollow-knight-rpg/main/system.json",
+  "download": "https://github.com/Rose1Starlight/hollow-knight-rpg/archive/refs/heads/main.zip",
   "license": "LICENSE.txt",
   "readme": "README.md"
-},
-"manifest": "https://raw.githubusercontent.com/Rose1Starlight/hollow-knight-rpg/main/system.json",
-  "download": "https://github.com/Rose1Starlight/hollow-knight-rpg/archive/refs/heads/main.zip",
 }
