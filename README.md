@@ -17,6 +17,9 @@ A complete system implementation of **The Unofficial Hollow Knight RPG** for Fou
 2. Restart Foundry VTT
 3. Create a new world using the "Hollow Knight RPG" system
 
+   Or Copy this link
+   https://raw.githubusercontent.com/Rose1Starlight/hollow-knight-rpg/main/system.json
+
 ## System Structure
 
 ```
@@ -61,7 +64,8 @@ hollow-knight-rpg/
 The system uses d6 dice pools where 5+ counts as a success. Half-die attributes grant rerolls.
 
 ## Credits
-
+Hollow Knight RPG
+Rose Starlight
 Based on **The Unofficial Hollow Knight RPG** fan project.
 Hollow Knight © Team Cherry. This is an unofficial fan project not affiliated with Team Cherry.
 
